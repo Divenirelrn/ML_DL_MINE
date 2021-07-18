@@ -1,0 +1,2 @@
+model_checkpoint_path: "/data/xiaojun/DeepLearningModels-master/firde/rcnn_model_alexnet-2400"
+all_model_checkpoint_paths: "/data/xiaojun/DeepLearningModels-master/firde/rcnn_model_alexnet-2400"

@@ -1,0 +1,1 @@
+python trainval_net.py --dataset pascal_voc --net vgg16 --epochs 100 --disp_interval 100 --checkpoint_interval 10000 --save_dir models --nw 8 --cuda True --mGPUs True --use_tfb True --lr 0.01 --bs 16 --cag True --exp_name vgg_cag3

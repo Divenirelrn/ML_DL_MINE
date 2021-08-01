@@ -1,0 +1,23 @@
+All_list: ./Data/all_list.txt
+Annotation_path: ./Data/Annotations
+Batch_size: 1
+Class_num: 8
+Classes: ['bus', 'microbus', 'microvan', 'minivan', 'suv', 'car', 'truck']
+Decay_iter: 900
+Decay_rate: 0.8
+Image_h: 1200
+Image_w: 1600
+Images_path: ./Data/Images/
+Initial_learning_rate: 1e-05
+Max_iter: 100000
+NMS_threshold: 0.05
+Processed_path: ./Data/Processed
+Roi_num: 600
+Roi_threshold: 0.7
+Save_iter: 500
+Staircase: True
+Summary_iter: 10
+Test_output: ./Test_output
+Train_list: ./Data/train_list.txt
+Valid_list: ./Data/valid_list.txt
+Weights_file: ./Output/save.ckpt-100000

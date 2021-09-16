@@ -1,0 +1,125 @@
+cmake编译选项
+-C <initial-cache>: 预加载一个脚本填充缓存文件
+-D <var>:<type>=<value>: 创建一个CMake的缓存条目
+-U <globbing_expr>: 从CMake的缓存文件中删除一条匹配的条目
+-G <generator-name>: 指定一个makefile生成工具
+-Wno-dev: 抑制开发者警告
+-Wdev: 使能开发者警告信息输出功能
+-E: CMake命令行模式
+-i: 以向导模式运行CMake
+-L[A][H]: 列出缓存的变量中的非高级的变量
+
+cmake常用变量
+查看变量命令：cmake --help-variable variable_name
+CMAKE_AR  静态库的归档工具名字。
+CMAKE_BINARY_DIR  构建树的顶层路径。
+CMAKE_BUILD_TOOL  实际构建过程中使用的工具。
+CMAKE_CACHEFILE_DIR  文件CMakeCache.txt所在的路径。
+CMAKE_CACHE_MAJOR_VERSION  用于创建CMakeCache.txt文件的CMake的主版本号。
+VCMAKE_CACHE_MINOR_VERSION  用于创建CMakeCache.txt文件的CMake的子版本号。
+CMAKE_CACHE_PATCH_VERSION  用于创建CMakeCache.txt文件的CMake的补丁号。
+CMAKE_CFG_INTDIR 构建时，与构建配置相对应的输出子路径（只读）。
+CMAKE_COMMAND 指向CMake可执行文件的完整路径。
+CMAKE_CROSSCOMPILING  指出CMake是否正在交叉编译。
+CMAKE_CTEST_COMMAND  与cmake一起安装的ctest命令的完整路径。
+CMAKE_CURRENT_BINARY_DIR 当前正在被处理的二进制目录的路径。
+CMAKE_CURRENT_LIST_DIR  当前正在处理的listfile的完整目录。
+CMAKE_CURRENT_LIST_FILE  当前正在处理的listfile的完整路径。
+CMAKE_CURRENT_LIST_LINE  当前正在处理的listfile的行号。
+CMAKE_CURRENT_SOURCE_DIR  指向正在被处理的源码目录的路径。
+CMAKE_DL_LIBS  包含dlopen和dlclose函数的库的名称。
+CMAKE_EDIT_COMMAND  指向cmake-gui或ccmake的完整路径。
+CMAKE_EXECUTABLE_SUFFIX(_<LANG>) 本平台上可执行文件的后缀。
+CMAKE_EXTRA_GENERATOR  构建本工程所需要的额外生成器。
+CMAKE_EXTRA_SHARED_LIBRARY_SUFFIXES 附加的共享库后缀（除CMAKE_SHARED_LIBRARY_SUFFIX以外，其他可以识别的共享库的后缀名。）
+CMAKE_GENERATOR  用于构建该工程的生成器。
+CMAKE_HOME_DIRECTORY指向源码树顶层的路径。
+CMAKE_IMPORT_LIBRARY_PREFIX(_<LANG>)  需要链接的导入库的前缀。
+CMAKE_IMPORT_LIBRARY_SUFFIX(_<LANG>)  需要链接的导入库的后缀。
+CMAKE_LINK_LIBRARY_SUFFIX  需要链接的库的后缀。
+CMAKE_MAJOR_VERSION  cmake的主版本号（例如2.X.X中的2）。
+CMAKE_MAKE_PROGRAM  参见CMAKE_BUILD_TOOL。
+CMAKE_MINOR_VERSION  cmake的次版本号（例如X.4.X中的4）。
+CMAKE_PARENT_LIST_FILE  当前正在被处理listfile的父listfile的全路径。
+CMAKE_PATCH_VERSION  cmake的补丁号(例如X.X.3中的3)。
+CMAKE_PROJECT_NAME  当前工程的工程名。
+CMAKE_RANLIB  静态库的随机化工具的名字（比如linux下的ranlib）。
+CMAKE_ROOT  CMake的安装路径。
+CMAKE_SHARED_LIBRARY_PREFIX(_<LANG>)  被链接的共享库的前缀。
+CMAKE_SHARED_LIBRARY_SUFFIX(_<LANG>)  被链接的共享库的后缀。
+CMAKE_SHARED_MODULE_PREFIX(_<LANG>) 被链接的可加载模块的前缀。
+CMAKE_SHARED_MODULE_SUFFIX(_<LANG>)  被链接的共享库的后缀。
+CMAKE_SIZEOF_VOID_P void指针的长度。
+CMAKE_SKIP_RPATH  如果变量为真，不为编译出的可执行文件添加运行时的路径信息。默认添加。
+CMAKE_SOURCE_DIR  源码树的顶层路径。
+CMAKE_STANDARD_LIBRARIES  链接到所有可执行文件和共享库上的库。这是一个list。
+CMAKE_STATIC_LIBRARY_PREFIX(_<LANG>)  被链接的静态库的前缀。
+CMAKE_STATIC_LIBRARY_SUFFIX(_<LANG>)  被链接的静态库的后缀。
+CMAKE_TWEAK_VERSION  cmake的tweak版本号(例如X.X.X.1中的1)。
+CMAKE_USING_VC_FREE_TOOLS  如果用到了免费的visual studio工具，设置为真。
+CMAKE_VERBOSE_MAKEFILE  设置该变量为真将创建完整版本的makefile。
+CMAKE_VERSION  cmake的完整版本号；格式为major.minor.patch[.tweak[-id]]。
+PROJECT_BINARY_DIR  指向工程构建目录的全路径。
+PROJECT_NAME  向project命令传递的工程名参数。
+PROJECT_SOURCE_DIR  当前工程的源码路径。
+[Project name]_BINARY_DIR  给定工程的二进制文件顶层路径。
+[Project name]_SOURCE_DIR  给定工程的源码顶层路径。
+
+cmake常用指令：
+add_custom_command  为生成的构建系统添加一条自定义的构建规则。
+add_custom_target  添加一个目标，它没有输出；这样它就总是会被构建。
+add_definitions 为源文件的编译添加由-D引入的define flag。
+add_dependencies 为顶层目标引入一个依赖关系。
+add_executable: 使用给定的源文件，为工程引入一个可执行文件。
+add_library 使用指定的源文件向工程中添加一个库。
+add_subdirectory 为构建添加一个子路径。
+add_test 以指定的参数为工程添加一个测试。
+aux_source_directory  查找在某个路径下的所有源文件。
+break 从一个包围该命令的foreach或while循环中跳出。
+build_command  获取构建该工程的命令行。
+cmake_minimum_required  设置一个工程所需要的最低CMake版本。
+cmake_policy  管理CMake的策略设置。
+configure_file: 将一份文件拷贝到另一个位置并修改它的内容。
+create_test_sourcelist: 为构建测试程序创建一个测试驱动器和源码列表。
+define_property: 定义并描述（Document）自定义属性。
+else 开始一个if语句块的else部分。
+elseif 开始if 块的 elseif 部分。
+enable_language 支持某种语言（CXX/C/Fortran/等）
+enable_testing 打开当前及以下目录中的测试功能。
+endforeach 结束foreach语句块中的一系列命令。
+endfunction 结束一个function语句块中的一系列命令。
+endif 结束一个if语句块中的一系列命令。
+endmacro 结束一个macro语句块中的一系列命令。
+endwhile 结束一个while语句块中的一系列命令。
+execute_process 执行一个或更多个子进程。
+export 从构建树中导出目标供外部使用。
+file  文件操作命令
+find_file 查找一个文件的完整路径。
+find_library 查找一个库文件
+find_package 为外部工程加载设置。
+find_path 搜索包含某个文件的路径
+find_program 查找可执行程序
+fltk_wrap_ui 创建FLTK用户界面包装器。
+foreach  对一个list中的每一个变量执行一组命令。
+function  开始记录一个函数，为以后以命令的方式调用它做准备。
+get_cmake_property  获取一个CMake实例的属性。
+get_directory_property  获取DIRECTORY域中的某种属性。
+get_filename_component 得到一个完整文件名中的特定部分。
+get_property 获取一个属性值
+get_source_file_property  为一个源文件获取一种属性值。
+get_target_property 从一个目标中获取一个属性值。
+get_test_property 获取一个测试的属性。
+if  条件执行一组命令。
+include 从给定的文件中读取CMake的列表文件。
+include_directories 为构建树添加包含路径。
+include_external_msproject 在一个workspace中包含一个外部的Microsoft工程。　
+include_regular_expression 设置用于依赖性检查的正则表达式。
+install 指定在安装时要运行的规则。
+link_directories 指定连接器查找库的路径。
+list列表操作命令。
+load_cache 从另一个工程的CMake cache中加载值。
+load_command 将一条命令加载到一个运行中的CMake。
+macro  为后续以命令方式调用而开始记录一组宏。
+mark_as_advanced  将CMake 的缓存变量标记为高级。
+math 数学表达式。
+message 为用户显示一条消息。

@@ -1,0 +1,122 @@
+cmake_minimum_required(VERSION 3.4.1)
+project(rknn_mobilenet_demo_linux)
+set(CMAKE_SYSTEM_NAME Linux)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+
+if(CMAKE_SIZEOF_VOID_P EQUAL 8)
+	message(STATUS "64bit")
+	set(LIB_ARCH lib64)
+else()
+	message(STATUS "32bit")
+	set(LIB_ARCH lib)
+endif()
+
+# rockx
+#set(RockX_DIR ${CMAKE_SOURCE_DIR}/sdk/rockx-rv1109-Linux)
+#find_package(RockX REQUIRED)
+#include_directories(${RockX_INCLUDE_DIRS})
+
+# rknn api
+set(RKNN_API_PATH ${CMAKE_SOURCE_DIR}/librknn_api)
+message(${RKNN_API_PATH})
+
+include_directories(${RKNN_API_PATH}/include)
+include_directories(3rdparty/libnpy)
+include_directories(3rdparty/mini-yaml/yaml)
+include_directories(3rdparty/miniz)
+include_directories(src/face)
+include_directories(src/model_infer)
+
+if(APPLE)
+	set(SYS_NAME darwin)
+endif()
+
+# opencv
+message(${CMAKE_C_COMPILER})
+
+set(SYS_NAME arm)
+#if(${CMAKE_C_COMPILER} MATCHES "arm")
+#    message("ARM ARCH")
+#	set(SYS_NAME arm)
+#	if(LIB_ARCH STREQUAL "lib")
+#		set(OpenCV_DIR ${CMAKE_SOURCE_DIR}/3rdparty/opencv/opencv-linux-armhf/share/OpenCV)
+#		message(${OpenCV_DIR})
+#		message("streequal lib")
+#	else()
+#		set(OpenCV_DIR ${CMAKE_SOURCE_DIR}/3rdparty/opencv/opencv-linux-aarch64/share/OpenCV)
+#		message("else here")
+#	endif()
+#else()
+#	set(OpenCV_DIR /Users/yujinke/Downloads/opencv4.5/opencv-4.5.0/build)
+#endif()
+
+link_directories(${RKNN_API_PATH}/lib/${SYS_NAME}/${LIB_ARCH})
+
+#find_package(OpenCV REQUIRED)
+#set(CMAKE_INSTALL_RPATH "lib")
+
+
+# yufan opencv
+include_directories(3rdparty/opencv_yufan/include)
+include_directories(3rdparty/opencv_yufan/include/opencv2)
+link_directories(3rdparty/opencv_yufan/lib/opencv/)
+
+
+set(MINI_YAML ${CMAKE_SOURCE_DIR}/3rdparty/mini-yaml/yaml/Yaml.cpp)
+set(SRC src/face/face_landmark.cpp src/face/feature_extract.cpp src/face/retinafacev2.cpp src/face/face_quality.cpp src/face/silent_live_ir.cpp src/model_infer/zip_wrapper.cpp src/model_infer/rknn_infer.cpp)
+add_library(nzface_rknn SHARED ${SRC} ${MINI_YAML})
+target_link_libraries(nzface_rknn rknn_api opencv_imgproc opencv_highgui opencv_core opencv_imgcodecs)# ${OpenCV_LIBS})
+
+add_library(face_rknn_static STATIC ${SRC} ${MINI_YAML})
+target_link_libraries(face_rknn_static rknn_api opencv_imgproc opencv_highgui opencv_core opencv_imgcodecs) #${OpenCV_LIBS})
+
+#add_executable(rknn_face_feature_extract_tool src/tools/feature_extract_tool.cpp)
+#target_link_libraries(rknn_face_feature_extract_tool nzface_rknn ${OpenCV_LIBS} )
+
+#add_executable(rknn_face_livness_ir_tool src/tools/livness_ir_tool.cpp)
+#target_link_libraries(rknn_face_livness_ir_tool nzface_rknn ${OpenCV_LIBS} )
+
+#add_executable(main_api src/main.cc)
+#target_link_libraries(main_api rknn_api ${OpenCV_LIBS} )
+
+#add_executable(rknn_face_detect_tool src/tools/face_detect_tool.cpp)
+#target_link_libraries(rknn_face_detect_tool nzface_rknn ${OpenCV_LIBS} )
+
+#add_executable(quality_test src/tools/quality_test.cpp)
+#target_link_libraries(quality_test nzface_rknn ${OpenCV_LIBS} ${RockX_LIBS})
+
+#add_executable(landmark_test src/tools/landmark_test.cpp)
+#target_link_libraries(landmark_test nzface_rknn ${OpenCV_LIBS} ${RockX_LIBS})
+
+#add_executable(facedetect_lj lujun_test/facedetect_test.cpp)
+#target_link_libraries(facedetect_lj nzface_rknn opencv_imgproc opencv_highgui opencv_core opencv_imgcodecs)#${OpenCV_LIBS})
+
+#add_executable(detect_memory lujun_test/detect_memory.cpp)
+#target_link_libraries(detect_memory face_rknn_static ${OpenCV_LIBS})
+
+#add_executable(quality_lj lujun_test/quality_test.cpp)
+#target_link_libraries(quality_lj nzface_rknn ${OpenCV_LIBS})
+
+#add_executable(feature_lj lujun_test/feature_test.cpp)
+#target_link_libraries(feature_lj nzface_rknn ${OpenCV_LIBS})
+
+#add_executable(landmark_lj lujun_test/landmark_test.cpp)
+#target_link_libraries(landmark_lj nzface_rknn ${OpenCV_LIBS})
+
+#add_executable(live_lj lujun_test/live_test.cpp)
+#target_link_libraries(live_lj nzface_rknn ${OpenCV_LIBS})
+
+#add_executable(face_all_alg_new src/tools/face_all_alg_new.cpp)
+#target_link_libraries(face_all_alg_new nzface_rknn ${OpenCV_LIBS})
+
+# install target and libraries
+#set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/install/artifacts)
+#install(TARGETS rknn_face_feature_extract_tool DESTINATION ./)
+#install(TARGETS nzface_rknn DESTINATION ./)
+#install(DIRECTORY model DESTINATION ./)
+#set(RKNN_API_LIB ${RKNN_API_PATH}/lib/${SYS_NAME}/${LIB_ARCH}/librknn_api.so)
+
+#message(${RKNN_API_LIB})
+#install(PROGRAMS ${RKNN_API_LIB} DESTINATION ./)

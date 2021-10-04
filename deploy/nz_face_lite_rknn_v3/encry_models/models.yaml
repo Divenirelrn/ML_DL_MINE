@@ -1,0 +1,26 @@
+Config Version: v0.1
+
+fatigue_recog:
+  name: fatigue_recog
+  version: 0.1
+  file_name: fatigue_recog.rknn
+  model_type: RKNN
+  infer_engine: RKNN
+  infer_deivce: RKNPU
+  infer_backend: RKNPU
+  input_data_order: NHWC
+  input_data_type: float32
+  norm_vals: 
+        - 1.0
+        - 1.0
+        - 1.0
+  mean_vals: 
+        - 0.0
+        - 0.0
+        - 0.0
+  input_nodes:
+        - norm_tensor:1
+  output_nodes:
+        - norm_tensor:0
+  threads: 1
+
